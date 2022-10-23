@@ -10,6 +10,7 @@
 char * leLinha();
 char ** separaTextoLinha(char * linha, int * posicao);
 void removePuloLinha(char * str);
+void lsh_cd(char **args);
 
 int main(void){
     char * linha;
@@ -24,7 +25,6 @@ int main(void){
         printf(">");
 
         linha = leLinha();
-
         removePuloLinha(linha);
 
         if(strcmp(linha, "exit") == 0){
@@ -32,7 +32,6 @@ int main(void){
         } 
 
         args = separaTextoLinha(linha, &contador);
-
         argc = contador;
 
         for(int i = 0; i < argc; i++){
@@ -42,17 +41,16 @@ int main(void){
         strcpy(programPath, path);
         strcat(programPath, args[0]);
 
-        /*for(int i=0; i<strlen(programPath); i++){    //delete newline
-            if(programPath[i]=='\n'){      
-                programPath[i]='\0';
-            }
-        }*/
-        
         pid_t pid = fork();
         
         if(pid == 0){
-            execvp(programPath, args);
-            perror("COMANDO INVALIDO!\n");
+            if(strcmp(args[0], "cd") == 0){
+                lsh_cd(args);
+            }else{
+                execvp(programPath, args);
+                perror("COMANDO INVALIDO!\n");
+                _exit(0);
+            }
         } else{
             wait(NULL);
         }
@@ -115,4 +113,14 @@ void removePuloLinha(char * str){
         str[tam - 1] = '\0';
     }
     
+}
+void lsh_cd(char **args)
+{
+  if (args[1] == NULL) {
+    fprintf(stderr, "lsh: expected argument to \"cd\"\n");
+  } else {
+    if (chdir(args[1]) != 0) {
+      perror("lsh");
+    }
+  }
 }
