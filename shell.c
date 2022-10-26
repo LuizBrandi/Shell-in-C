@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+#define DIR_TAM 300
 #define TAM_BUFFER 64
 #define TOKEN_DELIM " \n"
 
@@ -18,11 +19,14 @@ int main(void){
     int contador;
     int argc;
 
+    char diretorioAtual[DIR_TAM];
     char * path = "/bin/";
     char programPath[20];
 
     while(1){
-        printf(">");
+        printf("terminal@luiz:~");
+        getcwd(diretorioAtual, sizeof(diretorioAtual));
+        printf("%s$ ", diretorioAtual);
 
         linha = leLinha();
         removePuloLinha(linha);
