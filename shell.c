@@ -118,7 +118,7 @@ void removePuloLinha(char * str){
     }
     
 }
-void lsh_cd(char **args){
+void adiciona_cd(char **args){
   if (args[1] == NULL) {
     fprintf(stderr, "lsh: expected argument to \"cd\"\n");
   } else {
