@@ -5,4 +5,5 @@ Este terminal foi desenvolvido como uma atividade da disciplina de Sistemas Oper
 Os seguintes tutoriais auxiliaram na criação deste terminal:
 <br>
 https://brennan.io/2015/01/16/write-a-shell-in-c/
+<br>
 https://stackoverflow.com/questions/28502305/writing-a-simple-shell-in-c-using-fork-execvp
